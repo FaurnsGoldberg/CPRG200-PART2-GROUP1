@@ -33,12 +33,13 @@
             btnSuppliers = new Button();
             btnPackage = new Button();
             pictureBox1 = new PictureBox();
+            btnAgents = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnPackages
             // 
-            btnPackages.Location = new Point(91, 292);
+            btnPackages.Location = new Point(25, 292);
             btnPackages.Name = "btnPackages";
             btnPackages.Size = new Size(144, 70);
             btnPackages.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             // btnSuppliers
             // 
-            btnSuppliers.Location = new Point(551, 292);
+            btnSuppliers.Location = new Point(388, 292);
             btnSuppliers.Name = "btnSuppliers";
             btnSuppliers.Size = new Size(180, 70);
             btnSuppliers.TabIndex = 1;
@@ -58,11 +59,11 @@
             // 
             // btnPackage
             // 
-            btnPackage.Location = new Point(318, 292);
+            btnPackage.Location = new Point(190, 292);
             btnPackage.Name = "btnPackage";
             btnPackage.Size = new Size(170, 70);
             btnPackage.TabIndex = 2;
-            btnPackage.Text = "P&ackages";
+            btnPackage.Text = "Pa&ckages";
             btnPackage.UseVisualStyleBackColor = true;
             btnPackage.Click += btnPackage_Click;
             // 
@@ -76,12 +77,23 @@
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
+            // btnAgents
+            // 
+            btnAgents.Location = new Point(594, 292);
+            btnAgents.Name = "btnAgents";
+            btnAgents.Size = new Size(180, 70);
+            btnAgents.TabIndex = 4;
+            btnAgents.Text = "&Agents";
+            btnAgents.UseVisualStyleBackColor = true;
+            btnAgents.Click += btnAgents_Click;
+            // 
             // Welcome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAgents);
             Controls.Add(pictureBox1);
             Controls.Add(btnPackage);
             Controls.Add(btnSuppliers);
@@ -98,5 +110,6 @@
         private Button btnSuppliers;
         private Button btnPackage;
         private PictureBox pictureBox1;
+        private Button btnAgents;
     }
 }

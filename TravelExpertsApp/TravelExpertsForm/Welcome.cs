@@ -48,5 +48,14 @@ namespace TravelExpertsForm
         {
             this.Show();
         }
+
+        private void btnAgents_Click(object sender, EventArgs e)
+        {
+            AgentsForm agentsForm = new AgentsForm();
+            agentsForm.Show();
+
+            agentsForm.FormClosed += new FormClosedEventHandler(CloseForm);
+
+        }
     }
 }
