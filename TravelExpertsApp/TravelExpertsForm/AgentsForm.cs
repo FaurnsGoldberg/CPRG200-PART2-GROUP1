@@ -47,7 +47,7 @@ namespace TravelExpertsForm
 
             if (!EmailFilter.IsMatch(textBox6.Text))
             {
-                MessageBox.Show("!!! EMAIL MUST BE OF FORM ...@travelexperts.com !!!", "ERROR");
+                MessageBox.Show("!!! EMAIL MUST BE OF FORM . . . @travelexperts.com !!!", "ERROR");
                 textBox6.Select();
                 return false;
             }
@@ -72,6 +72,8 @@ namespace TravelExpertsForm
             Context.Agents.Add(Solution);
             Context.SaveChanges();
             CleanForm();
+
+            return;
         }
 
         //removes form entry from database
@@ -84,10 +86,22 @@ namespace TravelExpertsForm
             }
 
             var Solution = listBox1.SelectedItem as Agent;
+            string Response = "Are you sure you want to delete agent " + Solution.AgtFirstName + " " + Solution.AgtLastName;
+            var confirmResult = MessageBox.Show(Response, "Confirm Submission", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                var FixMe = Context.Customers.Where(Item => Item.AgentId == Solution.AgentId).ToList();
+                foreach (var Item in FixMe)
+                {
+                    Item.AgentId = null;
+                }
 
-            Context.Agents.Remove(Solution);
-            Context.SaveChanges();
-            CleanForm();
+                Context.Agents.Remove(Solution);
+                Context.SaveChanges();
+                CleanForm();
+            }
+
+            return;
         }
 
         //updates form entry in dataase
@@ -113,6 +127,8 @@ namespace TravelExpertsForm
             Context.Agents.Update(Solution);
             Context.SaveChanges();
             CleanForm();
+
+            return;
         }
 
         //class constructor
@@ -122,6 +138,7 @@ namespace TravelExpertsForm
             CleanForm();
         }
 
+        //AGENTS LISTBOX
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var Solution = listBox1.SelectedItem as Agent;
@@ -148,6 +165,7 @@ namespace TravelExpertsForm
             }
         }
 
+        //SUBMT BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
             if (radioButton1.Checked) { ADD(); }
@@ -155,6 +173,7 @@ namespace TravelExpertsForm
             if (radioButton3.Checked) { UPD(); }
         }
 
+        //EXIT BUTTON
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();

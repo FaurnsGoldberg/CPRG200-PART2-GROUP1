@@ -139,6 +139,41 @@ namespace TravelExpertsMVC.Controllers
                 return View();
             }
         }
+
+        public ActionResult RegisteredAgent()
+        {
+            int? CustomerId = HttpContext.Session.GetInt32("CustomerId");
+
+            if (CustomerId != null)
+            {
+                Customer ActiveUser = db.Customers.First(Item => Item.CustomerId == CustomerId);
+
+                if(ActiveUser.AgentId == null) { return View(); }
+
+                Agent DisplayMe = db.Agents.First(Item => Item.AgentId == ActiveUser.AgentId);
+                return View(DisplayMe);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ReleaseAgent()
+        {
+            int? CustomerId = HttpContext.Session.GetInt32("CustomerId");
+
+            if (CustomerId != null)
+            {
+                Customer ActiveUser = db.Customers.First(Item => Item.CustomerId == CustomerId);
+                ActiveUser.AgentId = null;
+                db.Customers.Update(ActiveUser);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("RegisteredAgent", "Account");
+        }
+
         public ActionResult OrderHistoryDetails(int id)
         {
             OrderDB orderDb = new OrderDB();

@@ -32,8 +32,10 @@
             groupBox7 = new GroupBox();
             textBox7 = new TextBox();
             groupBox6 = new GroupBox();
+            label2 = new Label();
             textBox6 = new TextBox();
             groupBox5 = new GroupBox();
+            label1 = new Label();
             textBox5 = new TextBox();
             groupBox4 = new GroupBox();
             textBox4 = new TextBox();
@@ -93,7 +95,7 @@
             groupBox7.Size = new Size(285, 63);
             groupBox7.TabIndex = 7;
             groupBox7.TabStop = false;
-            groupBox7.Text = "groupBox7";
+            groupBox7.Text = "position";
             // 
             // textBox7
             // 
@@ -105,13 +107,25 @@
             // 
             // groupBox6
             // 
+            groupBox6.Controls.Add(label2);
             groupBox6.Controls.Add(textBox6);
             groupBox6.Location = new Point(3, 363);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(285, 63);
             groupBox6.TabIndex = 6;
             groupBox6.TabStop = false;
-            groupBox6.Text = "groupBox6";
+            groupBox6.Text = "email";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = SystemColors.Control;
+            label2.ForeColor = Color.Red;
+            label2.Location = new Point(118, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(161, 20);
+            label2.TabIndex = 6;
+            label2.Text = ". . . @travelexperts.com";
             // 
             // textBox6
             // 
@@ -123,13 +137,25 @@
             // 
             // groupBox5
             // 
+            groupBox5.Controls.Add(label1);
             groupBox5.Controls.Add(textBox5);
             groupBox5.Location = new Point(3, 291);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(285, 63);
             groupBox5.TabIndex = 5;
             groupBox5.TabStop = false;
-            groupBox5.Text = "groupBox5";
+            groupBox5.Text = "phone";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = SystemColors.Control;
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(160, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(119, 20);
+            label1.TabIndex = 5;
+            label1.Text = "(XXX) XXX-XXXX";
             // 
             // textBox5
             // 
@@ -147,7 +173,7 @@
             groupBox4.Size = new Size(285, 63);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
-            groupBox4.Text = "groupBox4";
+            groupBox4.Text = "last name";
             // 
             // textBox4
             // 
@@ -165,7 +191,7 @@
             groupBox3.Size = new Size(285, 63);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
-            groupBox3.Text = "groupBox3";
+            groupBox3.Text = "middle initial";
             // 
             // textBox3
             // 
@@ -183,7 +209,7 @@
             groupBox2.Size = new Size(285, 63);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
+            groupBox2.Text = "first name";
             // 
             // textBox2
             // 
@@ -201,7 +227,7 @@
             groupBox1.Size = new Size(285, 63);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            groupBox1.Text = "id";
             // 
             // textBox1
             // 
@@ -359,5 +385,7 @@
         private RadioButton radioButton2;
         private Button button1;
         private Button button2;
+        private Label label2;
+        private Label label1;
     }
 }

@@ -1,0 +1,45 @@
+﻿@using System.Globalization
+@model TravelExpertsDB.Agent
+
+@{
+    ViewData["Title"] = "Registered Agent";
+}
+@if (TempData["Message"] != null)
+{
+    <h4 class="@(TempData["IsError"] != null? "text-danger": "text-success")">
+        @TempData["Message"]
+    </h4>
+}
+<div class="infopage">
+    <partial name="_AccountPartial" />
+    <div id="account-info" class="container-fluid mt-5 mb-5">
+        <div id="account-header">
+            <h1>Registered Agent</h1>
+        </div>
+        <dl class="row" id="account-body">
+            <div class="col-md-8">
+                @if (Model != null)
+                {
+                    <h4 class="card-title text-decoration-underline">
+                        @Html.DisplayFor(modelItem => Model.AgtFirstName)
+                        @Html.DisplayFor(modelItem => Model.AgtMiddleInitial)
+                        @Html.DisplayFor(modelItem => Model.AgtLastName)
+                    </h4>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => Model.AgtEmail)
+                        <br />
+                        @Html.DisplayFor(modelItem => Model.AgtBusPhone)
+                        <br />
+                        <a asp-action="ReleaseAgent" class="btn btn-sm btn-primary rounded-2 mt-2" asp-route-id="">Release Agent</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="card-text">
+                        nohting to see here...
+                    </p>
+                }
+            </div>
+        </dl>
+    </div>
+</div>
