@@ -11,11 +11,10 @@ namespace ThreadedWorkshop4
 {
     public partial class TravelPackageManager : Form
     {
-        private Package? selectedPackage = null;
-        private List<ProductSupplierDTO> initialProductsIncluded = new List<ProductSupplierDTO>();
-        private List<ProductSupplierDTO>? newSelectedProducts = new List<ProductSupplierDTO>();
-        private List<PackagesProductsSupplier> productsOnPackage = new List<PackagesProductsSupplier>();
-        private TravelExpertsDataConnection dbConnection = new();
+        private Package? selectedPackage = null; // selected package from form
+        private List<ProductSupplierDTO> initialProductsIncluded = new List<ProductSupplierDTO>(); // Products included on package from database
+        private List<ProductSupplierDTO>? newSelectedProducts = new List<ProductSupplierDTO>(); // Products included after package update
+        private TravelExpertsDataConnection dbConnection = new(); // Class with queries to work with Products, Packages, and Suppliers tables.
         public TravelPackageManager()
         {
             InitializeComponent();
@@ -25,6 +24,7 @@ namespace ThreadedWorkshop4
         {
             using (TravelExpertsContext db = new TravelExpertsContext())
             {
+                // combo box values displaying package names. Selected Value equals package id.
                 cboPackageName.DataSource = db.Packages.ToList();
                 cboPackageName.DisplayMember = "PkgName";
                 cboPackageName.ValueMember = "PackageID";
@@ -32,15 +32,16 @@ namespace ThreadedWorkshop4
 
                 if (selectedPackage != null)
                 {
-                    DisplayPackage();
+                    DisplayPackage(); // display the package information on the form
                 }
 
             }
         }
+
         private void cboProductID_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (cboPackageName.SelectedValue != null)
+            if (cboPackageName.SelectedValue != null) // if there a package is selected
             {
                 // convert the selected Product value to a string
                 string PackCodeString = cboPackageName.SelectedValue.ToString()!;
@@ -51,12 +52,12 @@ namespace ThreadedWorkshop4
                     {
                         using (TravelExpertsContext db = new TravelExpertsContext())
                         {
-                            // check if customer exists
+                            // check if package exists
 
-                            selectedPackage = db.Packages.Find(PackCode); //Find the matching product key from the database
+                            selectedPackage = db.Packages.Find(PackCode); //Find the matching package key from the database
                             if (selectedPackage != null)
                             {
-                                DisplayPackage();// if the product code exists, displays the product
+                                DisplayPackage();// if the package code exists, displays the package
                             }
                         }
                     }
@@ -81,7 +82,7 @@ namespace ThreadedWorkshop4
             DateTime? startDateNullable = selectedPackage!.PkgStartDate;
             DateTime? endDateNullable = selectedPackage!.PkgEndDate;
             decimal? commissionNullable = selectedPackage!.PkgAgencyCommission;
-            if (selectedPackage != null)
+            if (selectedPackage != null) // if there is a selected package
             {
                 cboPackageName.SelectedItem = selectedPackage.PackageId;
                 cboPackageName.Text = selectedPackage.PkgName;
@@ -95,6 +96,8 @@ namespace ThreadedWorkshop4
                 // Don't allow manual entries
                 this.dgvProducts.AllowUserToAddRows = false;
 
+                // if there are products attached to the package insert data into the data grid view
+                // of all product information attached to selected package.
                 if (productsAndSuppliers.Count > 0)
                 {
                     foreach (ProductSupplierDTO productSupplier in productsAndSuppliers)
@@ -103,7 +106,6 @@ namespace ThreadedWorkshop4
                         DataGridViewRow row = new DataGridViewRow();
                         row.CreateCells(dgvProducts);
 
-                        // Assuming the order of columns is the same as you added them
                         row.Cells[0].Value = productSupplier.ProductSupplierId;
                         row.Cells[1].Value = productSupplier.ProductId;
                         row.Cells[2].Value = productSupplier.ProductName;
@@ -118,29 +120,31 @@ namespace ThreadedWorkshop4
                 txtID.Text = Convert.ToString(selectedPackage.PackageId);
                 if (startDateNullable.HasValue)
                 {
-                    txtStartDate.Text = startDateNullable.Value.ToString("yyyy-MM-dd");
+                    txtStartDate.Text = startDateNullable.Value.ToString("yyyy-MM-dd"); // format start date
                 }
                 else
                 {
-                    // Handle the case when startDateNullable is null
-                    txtStartDate.Text = "N/A";  // Provide a default value or handle it as needed
+                    // default value in the case startDateNullable is null
+                    txtStartDate.Text = "N/A";
                 }
                 if (endDateNullable.HasValue)
                 {
-                    txtEndDate.Text = endDateNullable.Value.ToString("yyyy-MM-dd");
+                    txtEndDate.Text = endDateNullable.Value.ToString("yyyy-MM-dd"); // format end date
                 }
                 else
                 {
+                    // default value in the case endDateNullable is null
                     txtEndDate.Text = "N/A";
                 }
                 txtDesc.Text = selectedPackage.PkgDesc;
-                txtBasePrice.Text = selectedPackage.PkgBasePrice.ToString("c");
+                txtBasePrice.Text = selectedPackage.PkgBasePrice.ToString("c"); // currency format for base price
                 if (commissionNullable.HasValue)
                 {
-                    txtCommission.Text = commissionNullable.Value.ToString("c");
+                    txtCommission.Text = commissionNullable.Value.ToString("c"); // currency format for commission price
                 }
                 else
                 {
+                    // default value in the case commissionNullable is null
                     txtCommission.Text = "N/A";
                 }
             }
@@ -233,7 +237,7 @@ namespace ThreadedWorkshop4
             // and collect new data values
             frmAddModifyPackage secondForm = new frmAddModifyPackage();
             secondForm.isAdd = false; // it is Modify operation
-            secondForm.package = selectedPackage; // pass selected customer to the second form
+            secondForm.package = selectedPackage; // pass selected package to the second form
 
             DialogResult result = secondForm.ShowDialog();
             if (result == DialogResult.OK) // second form collected new data
@@ -249,7 +253,7 @@ namespace ThreadedWorkshop4
                 initialProductsIncluded = secondForm.includedProducts; // Product information of what was there before going through the second form.
                 newSelectedProducts = secondForm.checkedProducts; // Product information of what was selected on the datagridview.
                 
-                // update the selected package data on the Customers table
+                // update the selected package data on the Packages table
                 try
                 {
                     using (TravelExpertsContext db = new TravelExpertsContext())
@@ -303,7 +307,7 @@ namespace ThreadedWorkshop4
                                     }
                                 }
                             }
-                            db.Packages.Update(selectedPackage); // updates the selected product on the database
+                            db.Packages.Update(selectedPackage); // updates the selected package on the database
                             db.SaveChanges(); // saves the changes to the database
                             DisplayPackage(); // displays the modified product
                         }
@@ -339,7 +343,7 @@ namespace ThreadedWorkshop4
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            // remove the selected customer data on the Customers table
+            // remove the selected package data on the Packages table
             if (selectedPackage != null)
             {
                 List<ProductSupplierDTO> products = dbConnection.GetProductsAndSuppliersOfSelectedPackage(selectedPackage);
@@ -371,10 +375,10 @@ namespace ThreadedWorkshop4
                                     db.SaveChanges();
                                 }
                             }
-                            db.Packages.Remove(selectedPackage); // removes the selected product from the database
+                            db.Packages.Remove(selectedPackage); // removes the selected package from the database
                             db.SaveChanges(); // saves the changes to the database
-                            cboPackageName.DataSource = db.Packages.ToList(); // updates the product list after product has been removed
-                            // redisplays the updated product codes to the combo box
+                            cboPackageName.DataSource = db.Packages.ToList(); // updates the packages list after package has been removed
+                            // redisplays the updated package codes to the combo box
                             cboPackageName.DisplayMember = "PckName";
                             cboPackageName.ValueMember = "PackageID";
                             selectedPackage = null;
@@ -410,6 +414,7 @@ namespace ThreadedWorkshop4
             }
         }
 
+        // clears text boxes
         private void ClearControls()
         {
             txtID.Text = string.Empty;
@@ -420,6 +425,7 @@ namespace ThreadedWorkshop4
             txtBasePrice.Text = string.Empty;
         }
 
+        // closes this form
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();

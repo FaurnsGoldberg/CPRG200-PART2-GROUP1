@@ -20,6 +20,9 @@ namespace TravelExpertsWebMVC.Controllers
         {
             this.db = db;
         }
+
+        // [HttpGet]
+        // Returns view with all avaliable packages
         public ActionResult Index(int id)
         {
             List<Package> packages = PackageDB.GetPackages(db!);
@@ -27,12 +30,14 @@ namespace TravelExpertsWebMVC.Controllers
         }
 
         [Authorize]
-        public ActionResult Book(int id)
+        // [HttpGet]
+        // Return view of booking page. View is authorized to validated users.
+        public ActionResult Book(int id) // package id passed from view
         {
             Package? package = null;
             try
             {
-                package = PackageDB.GetPackageById(db!, id); // get slipid of selected slip from list
+                package = PackageDB.GetPackageById(db!, id); // get package data of package with matching packageid
                 int? customerId = HttpContext.Session.GetInt32("CustomerId");
                 if (package != null && customerId != null)
                 {
@@ -48,7 +53,7 @@ namespace TravelExpertsWebMVC.Controllers
                     List<TripType> types = BookingDB.GetTripTypes(db!);
                     ViewBag.Types = new SelectList(types);
                     viewModel.TripTypeId = types.FirstOrDefault()?.Ttname.Substring(0, 1);
-                    return View(viewModel); // return the slipid to the post method
+                    return View(viewModel); // return the TripTypeId to the view
 
                 }
             }
@@ -78,6 +83,8 @@ namespace TravelExpertsWebMVC.Controllers
             }
         }
 
+        //[HttpGet]
+        // Returns view of Booking confirmation displaying all booking details
         public ActionResult Confirmation(int id)
         {
             OrderDB orderDb = new OrderDB();
@@ -87,7 +94,7 @@ namespace TravelExpertsWebMVC.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult ChangeNum(decimal baseP, int numT) // filter by docks
+        public ActionResult ChangeNum(decimal baseP, int numT)
         {
             numT = Math.Max(numT, 1);
 

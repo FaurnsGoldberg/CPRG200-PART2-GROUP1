@@ -6,8 +6,21 @@ using System.Threading.Tasks;
 
 namespace TravelExpertsDB
 {
+    /// <summary>
+    /// Repository for methods to work with OrderDTO. (OrderDTO object is used to display necessary booking information)
+    /// </summary>
     public class OrderDB
     {
+        /// <summary>
+        /// Creates an OrderDTO object.
+        /// </summary>
+        /// <param name="bookId">booking id</param>
+        /// <param name="date">booking date</param>
+        /// <param name="travellers">traveller count</param>
+        /// <param name="packId">package id</param>
+        /// <param name="packName">package name</param>
+        /// <param name="packPrice">package price</param>
+        /// <returns>a OrderDTO object containing all provided data</returns>
         public OrderDTO CreateOrder(int bookId, DateTime? date, double? travellers, int? packId, string packName, decimal packPrice) 
         {
             decimal orderTotal = packPrice * (decimal)travellers;
@@ -24,6 +37,12 @@ namespace TravelExpertsDB
             return order;
         }
 
+        /// <summary>
+        /// Creates OrderDTO object with provided booking id
+        /// </summary>
+        /// <param name="db">db context</param>
+        /// <param name="id">booking id</param>
+        /// <returns>OrderDTO object containing all information related to provided booking id</returns>
         public OrderDTO GetOrderDetails(TravelExpertsContext db, int? id)
         {
             // Retrieve bookings for the specified customer
