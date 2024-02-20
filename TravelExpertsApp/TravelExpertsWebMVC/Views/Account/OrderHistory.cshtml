@@ -17,6 +17,25 @@
         <h1>Order History</h1>
         </div>
         <div id="account-body">
+            <h4 class="float-end mt-2 mb-2 me-3">
+                Total Balance:
+                @{
+                    // Initialize a variable to hold the total owing amount
+                    decimal totalOwing = 0;
+
+                    // Iterate through each item in the Model
+                    foreach (var item in Model)
+                    {
+                        // Calculate the owing amount for the current item
+                        decimal obalance = (decimal)item.Package.PkgBasePrice * (decimal)item.TravelerCount;
+                        totalOwing += obalance; // Add the current item's owing amount to the total
+                    }
+
+                    // Display the total owing amount
+                    var totalOwingFormat = totalOwing.ToString("C", CultureInfo.CurrentCulture);
+                    @totalOwingFormat
+                }
+            </h4>
             <table class="table" id="order-table">
                 <thead id="order-table">
                     <tr>
@@ -27,11 +46,12 @@
                             Booking Date
                         </th>
                         <th>
-                            Trip Type
+                            Package Price
                         </th>
                         <th>
-                            Outstanding Balance
+                            Remaining Balance
                         </th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -49,7 +69,11 @@
                                     @Html.DisplayFor(modelItem => item.BookingDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TripType.Ttname)
+                                    @{
+                                        decimal obalance = (decimal)item.Package.PkgBasePrice * (decimal)item.TravelerCount;
+                                        var oformat = obalance.ToString("C", CultureInfo.CurrentCulture);
+                                    }
+                                    @oformat
                                 </td>
                                 <td>
                                     @{
@@ -58,6 +82,9 @@
                                         var format = balance.ToString("C", CultureInfo.CurrentCulture);
                                     }
                                     @format
+                                </td>
+                                <td>
+                                    <a asp-action="OrderHistoryDetails" asp-route-id="@item.BookingId" class="btn btn-primary">Booking Details</a>
                                 </td>
                                 @if (item.Package.PkgBasePrice * (decimal)item.TravelerCount - item.TotalPaid > 0)
                                 {
@@ -68,8 +95,9 @@
                                     </td>
                                 }
                                 <td>
-                                    <a asp-action="OrderHistoryDetails" asp-route-id="@item.BookingId" class="btn btn-primary">Booking Details</a>
+                                    <a asp-action="CancelBooking" asp-route-id="@item.BookingId" class="btn btn-danger">Cancel Booking</a>
                                 </td>
+                                
                             </tr>
                         }
                     }

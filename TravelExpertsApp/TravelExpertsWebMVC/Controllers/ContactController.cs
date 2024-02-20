@@ -11,6 +11,9 @@ namespace TravelExpertsWebMVC.Controllers
         {
             this.db = db;
         }
+
+        //[HttpGet]
+        //Returns a list of Agencies to the agency details view.
         public IActionResult Index()
         {
             List<Agency> agencies = new List<Agency>();

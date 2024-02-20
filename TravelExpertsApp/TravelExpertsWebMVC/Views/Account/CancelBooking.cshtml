@@ -1,0 +1,73 @@
+﻿@model TravelExpertsDB.OrderDTO
+
+@{
+    ViewData["Title"] = "OrderHistoryDetails";
+}
+@if (TempData["Message"] != null)
+{
+    <h4 class="@(TempData["IsError"] != null? "text-danger": "text-success")">
+        @TempData["Message"]
+    </h4>
+}
+<div class="infopage">
+    <partial name="_AccountPartial" />
+    <div id="account-info" class="container-fluid mt-5">
+        <div id="account-header">
+            <h1>Cancel Booking</h1>
+        </div>
+        <dl class="row" id="account-body">
+            <h4>Are you sure you want to cancel this booking?</h4>
+            <dt class="col-sm-2 mt-2">
+                @Html.DisplayNameFor(model => model.BookingID)
+            </dt>
+            <dd id="personal" class="col-sm-10 mt-2">
+                @Html.DisplayFor(model => model.BookingID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TravelerCount)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.TravelerCount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PackageId)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.PackageId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PackageName)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.PackageName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PackagePrice)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.PackagePrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OrderTotal)
+            </dt>
+            <dd id="personal" class="col-sm-10">
+                @Html.DisplayFor(model => model.OrderTotal)
+            </dd>
+        </dl>
+        <div>
+            <form asp-action="CancelBooking" asp-controller="Account" method="post">
+                <a asp-action="OrderHistory" class="btn btn-primary">Back</a>
+                <input type="hidden" name="bookid" value="@Model.BookingID" />
+                <button type="submit" class="btn btn-danger">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

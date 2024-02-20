@@ -23,9 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThreadedWorkshop4\TravelPackageGUI.csproj" />
-    <ProjectReference Include="..\TravelExpertsDB\TravelExpertsDB.csproj" />
     <ProjectReference Include="..\TravelExpertsSuppliersDB\TravelExpertsSuppliersDB.csproj" />
+    <ProjectReference Include="..\TravelPackageGUI\TravelPackageGUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

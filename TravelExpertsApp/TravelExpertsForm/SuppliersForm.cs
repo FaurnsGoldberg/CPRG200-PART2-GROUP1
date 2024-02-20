@@ -42,7 +42,7 @@ namespace TravelExpertsForm
             dgvSuppliers.Columns[0].Width = 60;
             dgvSuppliers.Columns[1].HeaderText = "Name";
             dgvSuppliers.Columns[1].Width = 200;
-            dgvSuppliers.Columns[2].HeaderText = "# of Contacts";
+            dgvSuppliers.Columns[2].HeaderText = "Contacts";
 
             // format the column header
             dgvSuppliers.EnableHeadersVisualStyles = false;

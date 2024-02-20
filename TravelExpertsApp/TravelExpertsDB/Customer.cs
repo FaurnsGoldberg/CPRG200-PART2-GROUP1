@@ -38,10 +38,10 @@ public partial class Customer
     [DisplayName("Province:")]
     public string CustProv { get; set; } = null!; // create a drop down menu
 
-    [Required(ErrorMessage = "Please enter a Postal code.")]
+    [Required(ErrorMessage = "Please enter a Postal code")]
     [StringLength(7)]
     [DisplayName("Postal Code:")]
-    [RegularExpression("^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z][ -]?[0-9][ABCEGHJ-NPRSTV-Z][0-9]$", ErrorMessage = "Please enter a valid Postal code")]
+    [RegularExpression("^[ABCEGHJ-NPRSTVXYabceghj-nprstvxy][0-9][ABCEGHJ-NPRSTV-Zabceghj-nprstv-z][ -]?[0-9][ABCEGHJ-NPRSTV-Zabceghj-nprstv-z][0-9]$", ErrorMessage = "Please enter a valid Postal code. (A1A 1A1)")]
     public string CustPostal { get; set; } = null!;
 
     [Required(ErrorMessage = "Please enter a Country.")]    
@@ -50,19 +50,19 @@ public partial class Customer
     public string CustCountry { get; set; } = null!;
 
     [Required(ErrorMessage = "Please enter a phone number.")]
-    [RegularExpression("^\\d{3}\\d{7,17}$", ErrorMessage = "Please enter a valid phone number")]
+    [RegularExpression("^\\d{3}\\d{7,17}$", ErrorMessage = "Please enter a valid phone number. (4034443333)")]
     [StringLength(20)]
     [DisplayName("Phone:")]
     public string CustHomePhone { get; set; } = null!; //got
 
     [StringLength(20)]
-    [RegularExpression("^\\d{3}\\d{7,17}$", ErrorMessage = "Please enter a valid phone number")]
+    [RegularExpression("^\\d{3}\\d{7,17}$", ErrorMessage = "Please enter a valid phone number. (4034443333)")]
     [DisplayName("Business Phone:")]
     public string? CustBusPhone { get; set; } // not required but check for format
 
     [Required(ErrorMessage = "Please enter an email. Your email is used to sign in.")]
     [StringLength(50)]
-    [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Please enter a valid email address")]
+    [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Please enter a valid email address. (example@email.com)")]
     [DisplayName("Email:")]
     public string? CustEmail { get; set; } // not required but check for format
 

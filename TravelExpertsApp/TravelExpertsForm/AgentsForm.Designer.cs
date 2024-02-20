@@ -74,7 +74,8 @@
             tableLayoutPanel1.Controls.Add(groupBox3, 0, 2);
             tableLayoutPanel1.Controls.Add(groupBox2, 0, 1);
             tableLayoutPanel1.Controls.Add(groupBox1, 0, 0);
-            tableLayoutPanel1.Location = new Point(12, 12);
+            tableLayoutPanel1.Location = new Point(10, 9);
+            tableLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
@@ -84,15 +85,17 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.Size = new Size(291, 504);
+            tableLayoutPanel1.Size = new Size(255, 378);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox7
             // 
             groupBox7.Controls.Add(textBox7);
-            groupBox7.Location = new Point(3, 435);
+            groupBox7.Location = new Point(3, 326);
+            groupBox7.Margin = new Padding(3, 2, 3, 2);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(285, 63);
+            groupBox7.Padding = new Padding(3, 2, 3, 2);
+            groupBox7.Size = new Size(249, 47);
             groupBox7.TabIndex = 7;
             groupBox7.TabStop = false;
             groupBox7.Text = "position";
@@ -100,18 +103,21 @@
             // textBox7
             // 
             textBox7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox7.Location = new Point(6, 26);
+            textBox7.Location = new Point(5, 20);
+            textBox7.Margin = new Padding(3, 2, 3, 2);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(273, 27);
+            textBox7.Size = new Size(239, 23);
             textBox7.TabIndex = 0;
             // 
             // groupBox6
             // 
             groupBox6.Controls.Add(label2);
             groupBox6.Controls.Add(textBox6);
-            groupBox6.Location = new Point(3, 363);
+            groupBox6.Location = new Point(3, 272);
+            groupBox6.Margin = new Padding(3, 2, 3, 2);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(285, 63);
+            groupBox6.Padding = new Padding(3, 2, 3, 2);
+            groupBox6.Size = new Size(249, 47);
             groupBox6.TabIndex = 6;
             groupBox6.TabStop = false;
             groupBox6.Text = "email";
@@ -130,18 +136,21 @@
             // textBox6
             // 
             textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox6.Location = new Point(6, 26);
+            textBox6.Location = new Point(5, 20);
+            textBox6.Margin = new Padding(3, 2, 3, 2);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(273, 27);
+            textBox6.Size = new Size(239, 23);
             textBox6.TabIndex = 0;
             // 
             // groupBox5
             // 
             groupBox5.Controls.Add(label1);
             groupBox5.Controls.Add(textBox5);
-            groupBox5.Location = new Point(3, 291);
+            groupBox5.Location = new Point(3, 218);
+            groupBox5.Margin = new Padding(3, 2, 3, 2);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(285, 63);
+            groupBox5.Padding = new Padding(3, 2, 3, 2);
+            groupBox5.Size = new Size(249, 47);
             groupBox5.TabIndex = 5;
             groupBox5.TabStop = false;
             groupBox5.Text = "phone";
@@ -160,17 +169,20 @@
             // textBox5
             // 
             textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox5.Location = new Point(6, 26);
+            textBox5.Location = new Point(5, 20);
+            textBox5.Margin = new Padding(3, 2, 3, 2);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(273, 27);
+            textBox5.Size = new Size(239, 23);
             textBox5.TabIndex = 0;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(textBox4);
-            groupBox4.Location = new Point(3, 219);
+            groupBox4.Location = new Point(3, 164);
+            groupBox4.Margin = new Padding(3, 2, 3, 2);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(285, 63);
+            groupBox4.Padding = new Padding(3, 2, 3, 2);
+            groupBox4.Size = new Size(249, 47);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "last name";
@@ -178,17 +190,20 @@
             // textBox4
             // 
             textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox4.Location = new Point(6, 26);
+            textBox4.Location = new Point(5, 20);
+            textBox4.Margin = new Padding(3, 2, 3, 2);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(273, 27);
+            textBox4.Size = new Size(239, 23);
             textBox4.TabIndex = 0;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(textBox3);
-            groupBox3.Location = new Point(3, 147);
+            groupBox3.Location = new Point(3, 110);
+            groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(285, 63);
+            groupBox3.Padding = new Padding(3, 2, 3, 2);
+            groupBox3.Size = new Size(249, 47);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "middle initial";
@@ -196,17 +211,20 @@
             // textBox3
             // 
             textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.Location = new Point(6, 26);
+            textBox3.Location = new Point(5, 20);
+            textBox3.Margin = new Padding(3, 2, 3, 2);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(273, 27);
+            textBox3.Size = new Size(239, 23);
             textBox3.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(textBox2);
-            groupBox2.Location = new Point(3, 75);
+            groupBox2.Location = new Point(3, 56);
+            groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(285, 63);
+            groupBox2.Padding = new Padding(3, 2, 3, 2);
+            groupBox2.Size = new Size(249, 47);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "first name";
@@ -214,17 +232,20 @@
             // textBox2
             // 
             textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Location = new Point(6, 26);
+            textBox2.Location = new Point(5, 20);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(273, 27);
+            textBox2.Size = new Size(239, 23);
             textBox2.TabIndex = 0;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(textBox1);
-            groupBox1.Location = new Point(3, 3);
+            groupBox1.Location = new Point(3, 2);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(285, 63);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(249, 47);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "id";
@@ -232,19 +253,21 @@
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(6, 26);
+            textBox1.Location = new Point(5, 20);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(273, 27);
+            textBox1.Size = new Size(239, 23);
             textBox1.TabIndex = 0;
             // 
             // listBox1
             // 
             listBox1.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 17;
-            listBox1.Location = new Point(309, 12);
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(270, 9);
+            listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(902, 412);
+            listBox1.Size = new Size(790, 304);
             listBox1.TabIndex = 1;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -257,11 +280,12 @@
             tableLayoutPanel2.Controls.Add(radioButton3, 2, 0);
             tableLayoutPanel2.Controls.Add(radioButton2, 1, 0);
             tableLayoutPanel2.Controls.Add(radioButton1, 0, 0);
-            tableLayoutPanel2.Location = new Point(309, 440);
+            tableLayoutPanel2.Location = new Point(270, 330);
+            tableLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(564, 65);
+            tableLayoutPanel2.Size = new Size(494, 49);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // radioButton3
@@ -269,9 +293,10 @@
             radioButton3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             radioButton3.AutoSize = true;
             radioButton3.CheckAlign = ContentAlignment.BottomCenter;
-            radioButton3.Location = new Point(379, 3);
+            radioButton3.Location = new Point(331, 2);
+            radioButton3.Margin = new Padding(3, 2, 3, 2);
             radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(182, 59);
+            radioButton3.Size = new Size(160, 45);
             radioButton3.TabIndex = 5;
             radioButton3.TabStop = true;
             radioButton3.Text = "MODIFY";
@@ -283,9 +308,10 @@
             radioButton2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             radioButton2.AutoSize = true;
             radioButton2.CheckAlign = ContentAlignment.BottomCenter;
-            radioButton2.Location = new Point(191, 3);
+            radioButton2.Location = new Point(167, 2);
+            radioButton2.Margin = new Padding(3, 2, 3, 2);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(182, 59);
+            radioButton2.Size = new Size(158, 45);
             radioButton2.TabIndex = 4;
             radioButton2.TabStop = true;
             radioButton2.Text = "REMOVE";
@@ -297,9 +323,10 @@
             radioButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             radioButton1.AutoSize = true;
             radioButton1.CheckAlign = ContentAlignment.BottomCenter;
-            radioButton1.Location = new Point(3, 3);
+            radioButton1.Location = new Point(3, 2);
+            radioButton1.Margin = new Padding(3, 2, 3, 2);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(182, 59);
+            radioButton1.Size = new Size(158, 45);
             radioButton1.TabIndex = 3;
             radioButton1.TabStop = true;
             radioButton1.Text = "ADD";
@@ -308,9 +335,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(879, 444);
+            button1.Location = new Point(769, 333);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(163, 61);
+            button1.Size = new Size(143, 46);
             button1.TabIndex = 3;
             button1.Text = "SUBMIT";
             button1.UseVisualStyleBackColor = true;
@@ -318,9 +346,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(1048, 444);
+            button2.Location = new Point(917, 333);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(163, 61);
+            button2.Size = new Size(143, 46);
             button2.TabIndex = 4;
             button2.Text = "RETURN";
             button2.UseVisualStyleBackColor = true;
@@ -328,16 +357,17 @@
             // 
             // AgentsForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1223, 517);
+            ClientSize = new Size(1072, 394);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(listBox1);
             Controls.Add(tableLayoutPanel1);
-            MaximumSize = new Size(1241, 564);
-            MinimumSize = new Size(1241, 564);
+            Margin = new Padding(3, 2, 3, 2);
+            MaximumSize = new Size(1088, 433);
+            MinimumSize = new Size(1088, 433);
             Name = "AgentsForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "AgentsForm";

@@ -27,7 +27,12 @@ namespace TravelExpertsDB
             }
             return booking;
         }
-
+        public static bool DeleteBooking(TravelExpertsContext db, Booking booking)
+        {
+            db.Bookings.Remove(booking);
+            db.SaveChanges();
+            return true;
+        }
         public static bool SaveBooking(TravelExpertsContext db, Booking booking)
         {
             db.Bookings.Add(booking);

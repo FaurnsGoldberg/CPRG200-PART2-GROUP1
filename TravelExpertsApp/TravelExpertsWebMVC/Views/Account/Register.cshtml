@@ -20,7 +20,7 @@
             <h4>Login Information</h4>
             <div class="form-group mt-3">
                 <label class="control-label">Email<span class="text-danger">   *required</span></label>
-                <input asp-for="CustEmail" class="form-control rounded" />
+                <input asp-for="CustEmail" class="form-control rounded" placeholder="eg.  example@email.com"/>
                 <span asp-validation-for="CustEmail" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
@@ -47,12 +47,12 @@
             </div>
             <div class="form-group mt-3">
                 <label class="control-label">Phone<span class="text-danger">   *required</span></label>
-                <input asp-for="CustHomePhone" class="form-control rounded" />
+                <input asp-for="CustHomePhone" class="form-control rounded" placeholder="eg.  4034443333" />
                 <span asp-validation-for="CustHomePhone" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <label class="control-label">Business Phone</label>
-                <input asp-for="CustBusPhone" class="form-control rounded" />
+                <input asp-for="CustBusPhone" class="form-control rounded" placeholder="eg.  4034443333"/>
                 <span asp-validation-for="CustBusPhone" class="text-danger"></span>
             </div>
             <hr />
@@ -70,7 +70,7 @@
             <div class="form-group mt-3">
                 <label class="control-label">Province<span class="text-danger">   *required</span></label>
                 <select name="CustProv" asp-for="CustProv" class="form-select rounded">
-                    <option value="XXX">Select</option>
+                    <option value="">Select</option>
                     <option value ="AB">Alberta</option>
                     <option value="BC">British Columbia</option>
                     <option value="MB">Manitoba</option>
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group mt-3">
                 <label class="control-label">Postal Code<span class="text-danger">   *required</span></label>
-                <input asp-for="CustPostal" class="form-control rounded" />
+                <input asp-for="CustPostal" class="form-control rounded" placeholder="eg.  A1A 1A1"/>
                 <span asp-validation-for="CustPostal" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">

@@ -53,6 +53,10 @@ namespace TravelExpertsDB
                 customer.CustCountry = updatedCustomer.CustCountry;
                 customer.CustPostal = updatedCustomer.CustPostal;
                 customer.CustProv = updatedCustomer.CustProv;
+                if(updatedCustomer.CustBusPhone != null)
+                {
+                    customer.CustBusPhone = updatedCustomer.CustBusPhone;
+                }
                 db.Customers.Update(customer);
                 db.SaveChanges(); // save  changes to the database
             }

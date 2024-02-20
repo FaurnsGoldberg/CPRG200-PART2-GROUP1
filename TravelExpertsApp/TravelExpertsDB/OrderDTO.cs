@@ -25,6 +25,9 @@ namespace TravelExpertsDB
         [Display(Name = "Order Total")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? OrderTotal { get; set; }
+        [Display(Name = "Trip Type")]
+        public string? TripType { get; set; }
+
 
     }
 }

@@ -60,7 +60,6 @@ namespace TravelPackageGUI
                         DataGridViewRow row = new DataGridViewRow();
                         row.CreateCells(dgvProducts);
 
-                        // Assuming the order of columns is the same as you added them
                         row.Cells[0].Value = product.ProductSupplierId;
                         row.Cells[1].Value = product.ProductId;
                         row.Cells[2].Value = product.ProductName;
@@ -141,33 +140,36 @@ namespace TravelPackageGUI
                 txtName.Text = package.PkgName;
                 if (startDateNullable.HasValue)
                 {
-                    txtStartDate.Text = startDateNullable.Value.ToString("yyyy-MM-dd");
+                    txtStartDate.Text = startDateNullable.Value.ToString("yyyy-MM-dd"); // format date string
                 }
                 else
                 {
-                    // Handle the case when startDateNullable is null
-                    txtStartDate.Text = "N/A";  // Provide a default value or handle it as needed
+                    // Default value in the case startDateNullable is null
+                    txtStartDate.Text = "N/A"; 
                 }
                 if (endDateNullable.HasValue)
                 {
-                    txtEndDate.Text = endDateNullable.Value.ToString("yyyy-MM-dd");
+                    txtEndDate.Text = endDateNullable.Value.ToString("yyyy-MM-dd"); // format date string
                 }
                 else
                 {
+                    // Default value in the case endDateNullable is null
                     txtEndDate.Text = "N/A";
                 }
                 txtDesc.Text = package.PkgDesc;
-                txtPrice.Text = package.PkgBasePrice.ToString("c");
+                txtPrice.Text = package.PkgBasePrice.ToString("c"); // currency format base price
                 if (commissionNullable.HasValue)
                 {
-                    txtCommission.Text = commissionNullable.Value.ToString("c");
+                    txtCommission.Text = commissionNullable.Value.ToString("c"); // currency format commission price
                 }
                 else
                 {
+                    // Default value in the case commissionNullable is null
                     txtCommission.Text = "N/A";
                 }
             }
         }
+
         // Saves the new package to the data base if all entries are validated
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -195,6 +197,8 @@ namespace TravelPackageGUI
                 DialogResult = DialogResult.OK; // closes the form
             }
         }
+
+        // Displays package data if package is not null
         private void GetPackageData()
         {
 
@@ -203,6 +207,8 @@ namespace TravelPackageGUI
                 includedProducts = dbConnection.GetProductsAndSuppliersOfSelectedPackage(package);
                 package.PkgName = txtName.Text;
                 package.PkgDesc = txtDesc.Text;
+
+                // format package data string values for user friendly display
                 if (!String.IsNullOrEmpty(txtStartDate.Text) && txtStartDate.Text != "N/A")
                 {
                     package.PkgStartDate = Convert.ToDateTime(txtStartDate.Text);
@@ -219,7 +225,7 @@ namespace TravelPackageGUI
                 {
                     package.PkgAgencyCommission = Convert.ToDecimal(txtCommission.Text.Replace("$", "").Replace(",", ""));
                 }
-                //productsOnPackage.PackageId = Convert.ToInt32(package.PackageId);
+
                 // check through each row in the data grid view
                 foreach (DataGridViewRow row in dgvProducts.Rows)
                 {
@@ -241,6 +247,7 @@ namespace TravelPackageGUI
             }
         }
 
+        // button to close this form
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

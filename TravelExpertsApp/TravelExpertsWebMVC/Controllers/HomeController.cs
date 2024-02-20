@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
 using TravelExpertsWebMVC.Models;
 
@@ -13,12 +14,9 @@ namespace TravelExpertsWebMVC.Controllers
             _logger = logger;
         }
 
+        //[HttpGet]
+        // Returns view of home page
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

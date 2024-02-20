@@ -28,7 +28,6 @@ namespace TravelExpertsMVC.Controllers
             return View();
         }
 
-        // if a method is Asyncronous, it needs to return the task rather than a type.
         [HttpPost]
         public async Task<IActionResult> LoginAsync(Customer cust) // data collected from the form "user"
         {
@@ -69,7 +68,8 @@ namespace TravelExpertsMVC.Controllers
                 return Redirect(returnUrl); // Return to the page that initiated the login
             }
         }
-
+        
+        // Task to log out the user
         public async Task<IActionResult> LogoutAsync()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -78,16 +78,19 @@ namespace TravelExpertsMVC.Controllers
         }
 
         //[HttpGet]
+        // Register page with new Customer object.
         public ActionResult Register(string id = "Select")
         {
-            return View(new Customer());
+            return View(new Customer()); 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Customer newCustomerData)
         {
-            if (CustomerManager.EmailExists(db, newCustomerData.CustEmail))
+            // Check the email provided on the form for matching email in the database.
+            // Because the email is used in place of a Username, it must be unique to each account.
+            if (CustomerManager.EmailExists(db, newCustomerData.CustEmail)) // if there is a matching email, ModelState is not valid.
             {
                 ModelState.AddModelError("CustEmail", $"This email {newCustomerData.CustEmail} is already registered to an account.");
             }
@@ -96,6 +99,7 @@ namespace TravelExpertsMVC.Controllers
             {
                 try
                 {
+                    // Create and save customer to database.
                     CustomerManager.CreateCustomer(db, newCustomerData);
                     TempData["Message"] = $"Thank you for registering {newCustomerData.CustFirstName} {newCustomerData.CustLastName}!";
 
@@ -107,25 +111,25 @@ namespace TravelExpertsMVC.Controllers
                     TempData["Message"] = "There was a problem with registering. Please try again later.";
                     TempData["IsError"] = true;
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home"); // return to home page after successful registration
             }
             else
             {
-                return View(newCustomerData);
+                return View(newCustomerData); // stay on register page with existing form inputs
             }
         }
 
         //[HttpGet]
+        // Returns Account page displaying Session user data.
         public ActionResult Account()
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
             Customer customer = CustomerManager.GetCustomerData(db!, customerId);
             return View(customer);
-
         }
 
         //[HttpGet]
-        // Please use the same format as "Account.cshtml". Just replace the content inside of div id="account-info" to keep the style consistent.
+        // Returns Booking History page with all bookings made by session user
         public ActionResult OrderHistory()
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
@@ -174,13 +178,63 @@ namespace TravelExpertsMVC.Controllers
             return RedirectToAction("RegisteredAgent", "Account");
         }
 
-        public ActionResult OrderHistoryDetails(int id)
+        //[HttpGet]
+        // Returns Booking details of selected booking from booking history page.
+        public ActionResult OrderHistoryDetails(int id) // selected booking id
+        {
+            OrderDB orderDb = new OrderDB(); // class with methods for working with OrderDTO objects
+            OrderDTO order = orderDb.GetOrderDetails(db!, id);
+
+            return View(order);
+        }
+
+        //[HttpGet]
+        // Returns view with details of selected booking asking for confirmation.
+        public ActionResult CancelBooking(int id)
         {
             OrderDB orderDb = new OrderDB();
             OrderDTO order = orderDb.GetOrderDetails(db!, id);
 
             return View(order);
         }
+
+        [HttpPost]
+        // Removes selected Booking from Bookings table.
+        public ActionResult CancelBooking(int? bookid)
+        {
+            // if there is no booking id passed from the view.
+            if(bookid == null)
+            {
+                TempData["Message"] = "Could not find the booking. Please try again.";
+                TempData["IsError"] = true;
+                return RedirectToAction("OrderHistory", "Account"); // redirect user to account order history page
+            }
+            int bookingId = bookid.Value;
+
+            Booking booking = BookingDB.FindBooking(db!, bookingId);
+            // if there is no bookings with the provided BookingID.
+            if(booking == null)
+            {
+                TempData["Message"] = "Could not find the booking. Please try again.";
+                TempData["IsError"] = true;
+                return RedirectToAction("OrderHistory", "Account"); // redirect user to account order history page
+            }
+
+            bool success = BookingDB.DeleteBooking(db!, booking); // DeleteBooking returns true if booking is removed successfully.
+
+            if(success == true)
+            {
+                TempData["Message"] = $"Booking {bookingId} has been successfully cancelled.";
+                return RedirectToAction("OrderHistory", "Account"); // redirect user to account order history page with confirmation message
+            }
+            else // stay on the cancel booking page with error message
+            {
+                TempData["Message"] = "There was a problem with cancelling. Please try again later.";
+                TempData["IsError"] = true;
+            }
+            return View();
+        }
+
         [HttpPost]
         public ActionResult MakePayment(int? bookid)
         {
@@ -193,7 +247,46 @@ namespace TravelExpertsMVC.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ConfirmPayment(BookingPaymentViewModel model)
+        {
+            if (model.Payment > model.Balance)
+            {
+                ModelState.AddModelError("Payment", $"You cannot make a payment larger than the balance.");
+            }
+
+            if (model.Payment <= 0)
+            {
+                ModelState.AddModelError("Payment", $"Payments must be greater than 0.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Booking booking = BookingDB.FindBooking(db, model.BookingId);
+                    if (booking.TotalPaid == null) booking.TotalPaid = 0;
+                    booking.TotalPaid += model.Payment;
+                    db.SaveChanges();
+
+
+                }
+                catch (Exception e)
+                {
+                    TempData["Message"] = "There was a problem with payment. Please try again later.";
+                    TempData["IsError"] = true;
+                }
+                return RedirectToAction("OrderHistory", "Account");
+            }
+            else
+            {
+                return View("MakePayment", model);
+            }
+        }
+
         //[HttpGet]
+        // Returns view of form with users data pre filled in the input areas.
         public ActionResult Edit()
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
@@ -202,13 +295,16 @@ namespace TravelExpertsMVC.Controllers
         }
 
         [HttpPost]
+        // Saves changes on customer account after successful validation and updates the database.
         public ActionResult Edit(Customer editedCustomer)
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
+            // checks if the updated email already exists in the database, other than the current email the customer is using.
             if (CustomerManager.NewEmailExists(db, customerId, editedCustomer.CustEmail!))
             {
                 ModelState.AddModelError("CustEmail", $"This email {editedCustomer.CustEmail} is already registered to another account.");
             }
+            // Password is not updated on this form. So it is removed from the ModelState to pass validation.
             ModelState.Remove("Password");
             ModelState.Remove("ConfirmPassword");
             if (ModelState.IsValid)
@@ -223,22 +319,27 @@ namespace TravelExpertsMVC.Controllers
                     TempData["Message"] = "There was a problem with updating your account. Please try again later.";
                     TempData["IsError"] = true;
                 }
-                return RedirectToAction("Account", "Customer");
+                return RedirectToAction("Account", "Account"); // redirect customer to account details page.
             }
             else
             {
-                return View(editedCustomer);
+                return View(editedCustomer); // stay on page with current inputs in the case update is not successful
             }
         }
+
+        // [HttpGet]
+        // Returns view of empty form with Password and ConfirmPassword inputs
         public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
+        // Updates the users password if the model state is valid
         public ActionResult ChangePassword(Customer withNewPassword)
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
+            // remove everything but Password and ConfirmPassword from the Customer Model State.
             ModelState.Remove("CustFirstName");
             ModelState.Remove("CustLastName");
             ModelState.Remove("CustAddress");
@@ -262,10 +363,10 @@ namespace TravelExpertsMVC.Controllers
                 {
                     TempData["Message"] = "There was a problem with changing your password. Please try again later.";
                     TempData["IsError"] = true;
-                    return View();
+                    return View(); // stay on the current page if change is unsuccessful.
                 }
             }
-            return RedirectToAction("Account", "Customer");
+            return RedirectToAction("Account", "Account"); // return account details page when change is successful.
         }
     }
 }

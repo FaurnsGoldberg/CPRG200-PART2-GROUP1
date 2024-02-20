@@ -19,5 +19,7 @@ namespace TravelExpertsWebMVC.Models
 
         [Required(ErrorMessage = "You must enter a valid number.")]
         public decimal ? Payment {  get; set; }
+
+        public int ? BookingId { get; set; }
     }
 }
