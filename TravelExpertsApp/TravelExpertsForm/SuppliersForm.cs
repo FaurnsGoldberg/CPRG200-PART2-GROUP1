@@ -5,7 +5,8 @@ namespace TravelExpertsForm
 {
     public partial class SuppliersForm : Form
     {
-        private Supplier? selectedSupplier = null!; // Which product is currently being modified/deleted
+        private Supplier? selectedSupplier = null!;
+
         public SuppliersForm()
         {
             InitializeComponent();
@@ -16,6 +17,9 @@ namespace TravelExpertsForm
             DisplaySuppliers();
         }
 
+        /// <summary>
+        /// Fills the data grid view with data from the suppliers table
+        /// </summary>
         private void DisplaySuppliers()  // Refreshes the Suppliers
         {
             dgvSuppliers.Columns.Clear(); // Clear any existing data.
@@ -26,18 +30,23 @@ namespace TravelExpertsForm
             {
                 UseColumnTextForButtonValue = true,
                 HeaderText = "",
-                Text = "Modify"
+                Text = "Edit"
             };
             dgvSuppliers.Columns.Add(modifyColumn);
 
-            // add column for delete button
-            DataGridViewButtonColumn deleteColumn = new()
-            {
-                UseColumnTextForButtonValue = true,
-                HeaderText = "",
-                Text = "Remove"
-            };
-            dgvSuppliers.Columns.Add(deleteColumn);
+
+            //// Removed Delete column. Deleting suppliers is problematic if it's linked to any other data in the database, which is very likely
+
+            //// add column for delete button
+            //DataGridViewButtonColumn deleteColumn = new()
+            //{
+            //    UseColumnTextForButtonValue = true,
+            //    HeaderText = "",
+            //    Text = "Delete"
+            //};
+            //dgvSuppliers.Columns.Add(deleteColumn);
+
+
             dgvSuppliers.Columns[0].HeaderText = "ID";
             dgvSuppliers.Columns[0].Width = 60;
             dgvSuppliers.Columns[1].HeaderText = "Name";
@@ -56,15 +65,18 @@ namespace TravelExpertsForm
 
         }
 
+        /// <summary>
+        /// when the data grid view is clicked, check if its over the modify button and call modify if it is
+        /// </summary>
         private void dgvSuppliers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // index values for Modify and Delete button columns
             const int ModifyIndex = 3;
-            const int DeleteIndex = 4;
+            //const int DeleteIndex = 4;
 
             if (e.RowIndex > -1)  // make sure header row wasn't clicked
             {
-                if (e.ColumnIndex == ModifyIndex || e.ColumnIndex == DeleteIndex)
+                if (e.ColumnIndex == ModifyIndex /*|| e.ColumnIndex == DeleteIndex*/)
                 {
                     DataGridViewCell cell = dgvSuppliers.Rows[e.RowIndex].Cells[0];
                     string? val = cell.Value.ToString();
@@ -83,38 +95,42 @@ namespace TravelExpertsForm
                     {
                         ModifySupplier();
                     }
-                    else if (e.ColumnIndex == DeleteIndex)
-                    {
-                        DeleteSupplier();
-                    }
+                    //else if (e.ColumnIndex == DeleteIndex)
+                    //{
+                    //    DeleteSupplier();
+                    //}
                 }
             }
         }
 
-        private void DeleteSupplier()
-        {
-            if (selectedSupplier != null)
-            {
-                DialogResult result =
-                MessageBox.Show($"Delete {selectedSupplier.SupName}?",
-                "Confirm Delete", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    try
-                    {
-                        TravelExpertsDataAccess.RemoveSupplier(selectedSupplier);
-                        DisplaySuppliers();
-                    }
-                    catch (DataAccessException ex)
-                    {
-                        HandleDataAccessError(ex);
-                    }
-                }
-            }
 
-        }
+        // Removed DeleteSupplier() Deleting suppliers is problematic if it's linked to any other data in the database, which is very likely
+        //private void DeleteSupplier()
+        //{
+        //    if (selectedSupplier != null)
+        //    {
+        //        DialogResult result =
+        //        MessageBox.Show($"Delete {selectedSupplier.SupName}?",
+        //        "Confirm Delete", MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Question);
+        //        if (result == DialogResult.Yes)
+        //        {
+        //            try
+        //            {
+        //                TravelExpertsDataAccess.RemoveSupplier(selectedSupplier);
+        //                DisplaySuppliers();
+        //            }
+        //            catch (DataAccessException ex)
+        //            {
+        //                HandleDataAccessError(ex);
+        //            }
+        //        }
+        //    }
 
+        //}
+        /// <summary>
+        /// Open a dialog for modifying the selected supplier. If it results in OK, save the change into the DB.
+        /// </summary>
         private void ModifySupplier()
         {
             if (selectedSupplier != null)
@@ -142,6 +158,9 @@ namespace TravelExpertsForm
             }
         }
 
+        /// <summary>
+        /// Open a dialog for addiing a new supplier to the DB.
+        /// </summary>
         private void AddSupplier()
         {
             AddModifySupplierForm addModifyForm = new();

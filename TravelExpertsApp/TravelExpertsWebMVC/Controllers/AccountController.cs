@@ -235,6 +235,10 @@ namespace TravelExpertsMVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Opens the MakePayment screen for the passed bookid
+        /// </summary>
+        /// <author>Michael Chessall</author>
         [HttpPost]
         public ActionResult MakePayment(int? bookid)
         {
@@ -244,6 +248,7 @@ namespace TravelExpertsMVC.Controllers
             model.BookingDate = booking.BookingDate;
             booking.TotalPaid ??= 0;
             model.Balance = (decimal)booking.Package.PkgBasePrice * (decimal)booking.TravelerCount - booking.TotalPaid;
+            model.BookingId = booking.BookingId;
             return View(model);
         }
 
@@ -274,7 +279,7 @@ namespace TravelExpertsMVC.Controllers
                 }
                 catch (Exception e)
                 {
-                    TempData["Message"] = "There was a problem with payment. Please try again later.";
+                    TempData["Message"] = "There was a problem with payment. Please try again later." + model.BookingId;
                     TempData["IsError"] = true;
                 }
                 return RedirectToAction("OrderHistory", "Account");

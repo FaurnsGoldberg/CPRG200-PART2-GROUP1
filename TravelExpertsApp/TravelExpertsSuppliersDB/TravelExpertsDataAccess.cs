@@ -6,6 +6,10 @@ namespace TravelExpertsSuppliersDB;
 
 public record SupplierDTO(string SupplierId, string SupplierName, int numContacts); // Data Transfer Object to plug into Forms
 
+/// <summary>
+/// Static class to access suppliers and products
+/// </summary>
+/// <author>Michael and Mikkel</author>
 public static class TravelExpertsDataAccess
 {
     static int highestSupplierId = 0;
@@ -31,12 +35,18 @@ public static class TravelExpertsDataAccess
                 p.SupplierContacts.Count()!))
             .ToList();
 
+    /// <summary>
+    /// Creates a unique SupplierID thats at least 1 higher than the highest current supplierID in the DB
+    /// </summary>
+    /// <returns>supplierID</returns>
     public static int GetSupplierId()
     {
         int query = db.Suppliers.Max(x => x.SupplierId);
         if (query > highestSupplierId) highestSupplierId = query;
         return ++highestSupplierId;
     }
+
+
     public static int GetContactId()
     {
         int query = db.SupplierContacts.Max(x => x.SupplierContactId);

@@ -91,7 +91,10 @@ namespace TravelExpertsWebMVC.Controllers
             OrderDTO order = orderDb.GetOrderDetails(db, id);
             return View(order);
         }
-
+        /// <summary>
+        /// Called when the number of travelers is changed. Returns a view component that updates the total cost of the package 
+        /// </summary>
+        /// <author>Michael Chessall</author>
         [HttpPost]
         [Authorize]
         public ActionResult ChangeNum(decimal baseP, int numT)

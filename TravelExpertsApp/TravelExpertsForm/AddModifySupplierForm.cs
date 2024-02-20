@@ -2,6 +2,10 @@
 using TravelExpertsSuppliersDB;
 
 namespace TravelExpertsForm;
+/// <summary>
+/// Form used when adding or modifying an existing supplier
+/// </summary>
+/// <author>Michael Chessall</author>
 public partial class AddModifySupplierForm : Form
 {
     private SupplierContact selectedSupplierContact = null!;
@@ -12,7 +16,10 @@ public partial class AddModifySupplierForm : Form
 
     public Supplier supplier { get; set; } = null!;
 
-    private void DisplayContacts()  // Refreshes the Suppliers
+    /// <summary>
+    /// Adds each contact to the dropdown list
+    /// </summary>
+    private void DisplayContacts()  
     {
         cmbContacts.Items.Clear();
         List<SupplierContact> contacts = TravelExpertsDataAccess.GetSupplierContacts(supplier);
@@ -21,6 +28,9 @@ public partial class AddModifySupplierForm : Form
             cmbContacts.Items.Add(item);
         }
     }
+    /// <summary>
+    /// Create a new contact and add it to the current supplier.
+    /// </summary>
     private void AddContact()
     {
         SupplierContact contact = new SupplierContact();
@@ -34,6 +44,9 @@ public partial class AddModifySupplierForm : Form
         cmbContacts.SelectedItem = contact;
 
     }
+    /// <summary>
+    /// Hides the group box which displays contact data
+    /// </summary>
     private void HideContactData()
     {
         grbContact.Visible = false;
@@ -42,15 +55,23 @@ public partial class AddModifySupplierForm : Form
         txtCompany.Text = "";
         txtEmail.Text = "";
     }
-    private void ShowContactData(SupplierContact supplier)
+    /// <summary>
+    /// displays the group box which displays contact data and updates textboxes to match the suppliercontact
+    /// </summary>
+    /// <param name="suppliercontact">the selected suppliercontact to pull data from</param>
+    private void ShowContactData(SupplierContact suppliercontact)
     {
         grbContact.Visible = true;
-        txtFirstName.Text = supplier.SupConFirstName;
-        txtLastName.Text = supplier.SupConLastName;
-        txtCompany.Text = supplier.SupConCompany;
-        txtEmail.Text = supplier.SupConEmail;
+        txtFirstName.Text = suppliercontact.SupConFirstName;
+        txtLastName.Text = suppliercontact.SupConLastName;
+        txtCompany.Text = suppliercontact.SupConCompany;
+        txtEmail.Text = suppliercontact.SupConEmail;
 
     }
+
+    /// <summary>
+    /// when the contacts dropdown list selection is changed
+    /// </summary>
     private void cmbContacts_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (cmbContacts.SelectedItem != null)
@@ -58,11 +79,12 @@ public partial class AddModifySupplierForm : Form
             SupplierContact contact = (SupplierContact)cmbContacts.SelectedItem;
             ShowContactData(contact);
         }
-        else
+        else // selected contact is null, hide contact data
         {
             HideContactData();
         }
     }
+
     private void frmAddModify_Load(object sender, EventArgs e)
     {
         if (supplier == null)
@@ -75,7 +97,9 @@ public partial class AddModifySupplierForm : Form
             ModifySupplierSetup();
         }
     }
-
+    /// <summary>
+    /// setup the form for modifying an existing supplier
+    /// </summary>
     private void ModifySupplierSetup()
     {
         Text = "Modify Supplier";
@@ -84,7 +108,9 @@ public partial class AddModifySupplierForm : Form
         DisplayContacts();
         txtName.Focus();
     }
-
+    /// <summary>
+    /// setup the form for adding a new supplier
+    /// </summary>
     private void AddSupplierSetup()
     {
         supplier = new Supplier();
@@ -138,6 +164,9 @@ public partial class AddModifySupplierForm : Form
         AddContact();
     }
 
+    /// <summary>
+    /// deletes the selected contact
+    /// </summary>
     private void btnDeleteContact_Click(object sender, EventArgs e)
     {
         if (cmbContacts.SelectedItem != null)
@@ -149,7 +178,9 @@ public partial class AddModifySupplierForm : Form
         }
 
     }
-
+    /// <summary>
+    /// saves changes made to the current contact
+    /// </summary>
     private void btnContactSave_Click(object sender, EventArgs e)
     {
         if (IsValidContactData() && cmbContacts.SelectedItem != null)

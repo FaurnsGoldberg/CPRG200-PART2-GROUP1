@@ -77,8 +77,9 @@
                                 </td>
                                 <td>
                                     @{
-                                        item.TotalPaid ??= 0;
-                                        decimal balance = (decimal)item.Package.PkgBasePrice * (decimal)item.TravelerCount - (decimal)item.TotalPaid;
+                                        var totalpaid = item.TotalPaid;
+                                        totalpaid ??= 0;
+                                        decimal balance = (decimal)item.Package.PkgBasePrice * (decimal)item.TravelerCount - (decimal)totalpaid;
                                         var format = balance.ToString("C", CultureInfo.CurrentCulture);
                                     }
                                     @format
@@ -86,7 +87,7 @@
                                 <td>
                                     <a asp-action="OrderHistoryDetails" asp-route-id="@item.BookingId" class="btn btn-primary">Booking Details</a>
                                 </td>
-                                @if (item.Package.PkgBasePrice * (decimal)item.TravelerCount - item.TotalPaid > 0)
+                                @if (item.Package.PkgBasePrice * (decimal)item.TravelerCount - totalpaid > 0)
                                 {
                                     <td>
                                         <form asp-action="MakePayment" method="post">

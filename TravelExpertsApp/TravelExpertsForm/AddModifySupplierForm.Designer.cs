@@ -54,7 +54,7 @@ partial class AddModifySupplierForm
         // label2
         // 
         label2.AutoSize = true;
-        label2.Location = new Point(11, 243);
+        label2.Location = new Point(18, 257);
         label2.Margin = new Padding(2, 0, 2, 0);
         label2.Name = "label2";
         label2.Size = new Size(88, 15);
@@ -63,7 +63,7 @@ partial class AddModifySupplierForm
         // 
         // txtName
         // 
-        txtName.Location = new Point(103, 241);
+        txtName.Location = new Point(110, 255);
         txtName.Margin = new Padding(2);
         txtName.Name = "txtName";
         txtName.Size = new Size(220, 23);
@@ -72,7 +72,7 @@ partial class AddModifySupplierForm
         // lblSupId
         // 
         lblSupId.AutoSize = true;
-        lblSupId.Location = new Point(11, 213);
+        lblSupId.Location = new Point(18, 227);
         lblSupId.Margin = new Padding(2, 0, 2, 0);
         lblSupId.Name = "lblSupId";
         lblSupId.Size = new Size(67, 15);
@@ -81,7 +81,7 @@ partial class AddModifySupplierForm
         // 
         // txtSupplierId
         // 
-        txtSupplierId.Location = new Point(103, 211);
+        txtSupplierId.Location = new Point(110, 225);
         txtSupplierId.Margin = new Padding(2);
         txtSupplierId.Name = "txtSupplierId";
         txtSupplierId.ReadOnly = true;
@@ -90,7 +90,7 @@ partial class AddModifySupplierForm
         // 
         // btnCancel
         // 
-        btnCancel.Location = new Point(112, 273);
+        btnCancel.Location = new Point(119, 287);
         btnCancel.Margin = new Padding(2);
         btnCancel.Name = "btnCancel";
         btnCancel.Size = new Size(90, 24);
@@ -101,7 +101,7 @@ partial class AddModifySupplierForm
         // 
         // btnAccept
         // 
-        btnAccept.Location = new Point(11, 273);
+        btnAccept.Location = new Point(18, 287);
         btnAccept.Margin = new Padding(2);
         btnAccept.Name = "btnAccept";
         btnAccept.Size = new Size(90, 24);
@@ -141,7 +141,7 @@ partial class AddModifySupplierForm
         grbContact.Controls.Add(txtFirstName);
         grbContact.Location = new Point(12, 76);
         grbContact.Name = "grbContact";
-        grbContact.Size = new Size(615, 130);
+        grbContact.Size = new Size(752, 134);
         grbContact.TabIndex = 23;
         grbContact.TabStop = false;
         grbContact.Visible = false;
@@ -257,7 +257,7 @@ partial class AddModifySupplierForm
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         CancelButton = btnCancel;
-        ClientSize = new Size(639, 308);
+        ClientSize = new Size(799, 368);
         ControlBox = false;
         Controls.Add(btnDeleteContact);
         Controls.Add(btnAddContact);
