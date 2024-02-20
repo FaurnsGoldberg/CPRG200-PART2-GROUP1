@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TravelExpertsDB.Agent>
+
+@{
+    ViewData["Title"] = "Agents";
+}
+
+<h1 class="mt-5">Our Agents</h1>
+<hr />
+@foreach (var item in Model)
+{
+    <div class="card mb-5" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="~/images/logoblue.png" class="img-fluid rounded-4">
+            </div>
+            <div class="col-md-8" align="right">
+                <h4 class="card-title text-decoration-underline">
+                    @Html.DisplayFor(modelItem => item.AgtFirstName)
+                    @Html.DisplayFor(modelItem => item.AgtMiddleInitial)
+                    @Html.DisplayFor(modelItem => item.AgtLastName)
+                </h4>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => item.AgtEmail)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.AgtBusPhone)
+                    <br />
+                    <a asp-action="RegisterAgent" class="btn btn-sm btn-primary rounded-2 mt-2" asp-route-id="@item.AgentId">Register With Agent</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}
